@@ -37,7 +37,7 @@ Find the entry containing the smallest Key key greater than (gt) SearchKey in Tr
 smallest_key_gte/2 
 ------------------
 
-Find the entry containing the smallest Key key greater than or equal (gte) SearchKey in Tree.
+Find the entry containing the smallest Key key greater than or equal (gte) to SearchKey in Tree.
 
 ```erlang
 -spec smallest_key_gte(SearchKey::term(), Tree::gb_tree()) ->
