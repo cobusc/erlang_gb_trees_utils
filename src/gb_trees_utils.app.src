@@ -1,0 +1,8 @@
+{application, gb_trees_utils,
+ [{description, "gb_trees utility functions"},
+  {vsn, "1.0.0"},
+  {modules, [gb_trees_utils]},
+  {registered, []},
+  {applications, []},
+  {included_applications, []}
+ ]}.
