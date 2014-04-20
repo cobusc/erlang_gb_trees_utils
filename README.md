@@ -44,7 +44,3 @@ Find the entry containing the smallest Key key greater than or equal (gte) to Se
     'none' | {Key::term(), Value::term()}.
 ```
 
-TODO
-----
-Maybe add some beafier tests.
-
