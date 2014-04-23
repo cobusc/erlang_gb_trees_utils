@@ -13,18 +13,14 @@
     'none' | {Key::term(), Value::term()}.
 
 greatest_key_lt(SearchKey, {_, TreeNode}) ->
-    gklt(SearchKey, TreeNode).
+    gklt(SearchKey, TreeNode, none).
 
-gklt(SearchKey, {Key, Value, _, LargerTree}) when Key < SearchKey ->
-    % Check if a more optimal solution exists.
-    case gklt(SearchKey, LargerTree) of
-        none -> {Key, Value};
-        Better -> Better
-    end;
-gklt(SearchKey, {_, _, SmallerTree, _}) ->
-    gklt(SearchKey, SmallerTree);
-gklt(_, nil) ->
-    none.
+gklt(SearchKey, {Key, Value, _, LargerTree}, _) when Key < SearchKey ->
+    gklt(SearchKey, LargerTree, {Key, Value});
+gklt(SearchKey, {_, _, SmallerTree, _}, BestSoFar) ->
+    gklt(SearchKey, SmallerTree, BestSoFar);
+gklt(_, nil, BestSoFar) ->
+    BestSoFar.
 
 
 %%
@@ -34,20 +30,16 @@ gklt(_, nil) ->
     'none' | {Key::term(), Value::term()}.
 
 greatest_key_lte(SearchKey, {_, TreeNode}) ->
-    gklte(SearchKey, TreeNode).
+    gklte(SearchKey, TreeNode, none).
 
-gklte(SearchKey, {Key, Value, _, LargerTree}) when Key < SearchKey ->
-    % Check if a more optimal solution exists.
-    case gklte(SearchKey, LargerTree) of
-        none -> {Key, Value};
-        Better -> Better
-    end;
-gklte(SearchKey, {Key, _, SmallerTree, _}) when SearchKey < Key ->
-    gklte(SearchKey, SmallerTree);
-gklte(SearchKey, {SearchKey, Value, _, _}) ->
-    {SearchKey, Value};
-gklte(_, nil) ->
-    none.
+gklte(SearchKey, {Key, Value, _, LargerTree}, _) when Key < SearchKey ->
+    gklte(SearchKey, LargerTree, {Key, Value});
+gklte(SearchKey, {Key, _, SmallerTree, _}, BestSoFar) when SearchKey < Key ->
+    gklte(SearchKey, SmallerTree, BestSoFar);
+gklte(_, {Key, Value, _, _}, _) ->
+    {Key, Value};
+gklte(_, nil, BestSoFar) ->
+    BestSoFar.
 
 
 %%
@@ -57,18 +49,14 @@ gklte(_, nil) ->
     'none' | {Key::term(), Value::term()}.
 
 smallest_key_gt(SearchKey, {_, TreeNode}) ->
-    skgt(SearchKey, TreeNode).
+    skgt(SearchKey, TreeNode, none).
 
-skgt(SearchKey, {Key, Value, SmallerTree, _}) when SearchKey < Key ->
-    % Check if a more optimal solution exists.
-    case skgt(SearchKey, SmallerTree) of
-        none -> {Key, Value};
-        Better -> Better
-    end;
-skgt(SearchKey, {_, _, _, LargerTree}) ->
-    skgt(SearchKey, LargerTree);
-skgt(_, nil) ->
-    none.
+skgt(SearchKey, {Key, Value, SmallerTree, _}, _) when SearchKey < Key ->
+    skgt(SearchKey, SmallerTree, {Key, Value});
+skgt(SearchKey, {_, _, _, LargerTree}, BestSoFar) ->
+    skgt(SearchKey, LargerTree, BestSoFar);
+skgt(_, nil, BestSoFar) ->
+    BestSoFar.
 
 
 %%
@@ -78,18 +66,14 @@ skgt(_, nil) ->
     'none' | {Key::term(), Value::term()}.
 
 smallest_key_gte(SearchKey, {_, TreeNode}) ->
-    skgte(SearchKey, TreeNode).
+    skgte(SearchKey, TreeNode, none).
 
-skgte(SearchKey, {Key, Value, SmallerTree, _}) when SearchKey < Key ->
-    % Check if a more optimal solution exists.
-    case skgte(SearchKey, SmallerTree) of
-        none -> {Key, Value};
-        Better -> Better
-    end;
-skgte(SearchKey, {Key, _, _, LargerTree}) when Key < SearchKey ->
-    skgte(SearchKey, LargerTree);
-skgte(SearchKey, {SearchKey, Value, _, _}) ->
-    {SearchKey, Value};
-skgte(_, nil) ->
-    none.
+skgte(SearchKey, {Key, Value, SmallerTree, _}, _) when SearchKey < Key ->
+    skgte(SearchKey, SmallerTree, {Key, Value});
+skgte(SearchKey, {Key, _, _, LargerTree}, BestSoFar) when Key < SearchKey ->
+    skgte(SearchKey, LargerTree, BestSoFar);
+skgte(_, {Key, Value, _, _}, _) ->
+    {Key, Value};
+skgte(_, nil, BestSoFar) ->
+    BestSoFar.
 
