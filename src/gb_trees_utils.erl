@@ -9,7 +9,7 @@
 %%
 %% @doc Find the entry containing the greatest Key less than (lt) SearchKey in Tree.
 %%
--spec greatest_key_lt(SearchKey::term(), Tree::gb_tree()) -> 
+-spec greatest_key_lt(SearchKey::term(), Tree::gb_trees:tree()) ->
     'none' | {Key::term(), Value::term()}.
 
 greatest_key_lt(SearchKey, {_, TreeNode}) ->
@@ -26,7 +26,7 @@ gklt(_, nil, BestSoFar) ->
 %%
 %% @doc Find the entry containing the greatest Key less than or equal (lte) to SearchKey in Tree.
 %%
--spec greatest_key_lte(SearchKey::term(), Tree::gb_tree()) -> 
+-spec greatest_key_lte(SearchKey::term(), Tree::gb_trees:tree()) ->
     'none' | {Key::term(), Value::term()}.
 
 greatest_key_lte(SearchKey, {_, TreeNode}) ->
@@ -45,7 +45,7 @@ gklte(_, nil, BestSoFar) ->
 %%
 %% @doc Find the entry containing the smallest Key key greater than (gt) SearchKey in Tree.
 %%
--spec smallest_key_gt(SearchKey::term(), Tree::gb_tree()) -> 
+-spec smallest_key_gt(SearchKey::term(), Tree::gb_trees:tree()) ->
     'none' | {Key::term(), Value::term()}.
 
 smallest_key_gt(SearchKey, {_, TreeNode}) ->
@@ -62,7 +62,7 @@ skgt(_, nil, BestSoFar) ->
 %%
 %% @doc Find the entry containing the smallest Key key greater than or equal (gte) SearchKey in Tree.
 %%
--spec smallest_key_gte(SearchKey::term(), Tree::gb_tree()) -> 
+-spec smallest_key_gte(SearchKey::term(), Tree::gb_trees:tree()) ->
     'none' | {Key::term(), Value::term()}.
 
 smallest_key_gte(SearchKey, {_, TreeNode}) ->
