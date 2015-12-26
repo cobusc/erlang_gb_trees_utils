@@ -52,13 +52,13 @@ smallest_key_gte(_, []) ->
 
 %%%
 %%% The tests
-%%% 
+%%%
 
 %%
 %% Compare the gb_tree_utils functions against the list-based implementations
 %%
 general_test() ->
-    random:seed(now()),
+    random:seed(os:timestamp()),
     GenFun = fun(V) ->
         X = random:uniform(),
         {X, integer_to_list(V)}
@@ -74,7 +74,7 @@ general_test() ->
     end,
     [ TestFun(random:uniform()) || _ <- lists:seq(1, 2000)],
     % Corner cases
-    ?assertEqual(none, gb_trees_utils:greatest_key_lte(-1, TestTree)), 
+    ?assertEqual(none, gb_trees_utils:greatest_key_lte(-1, TestTree)),
     TestFun(-1),
     ?assertEqual(none, gb_trees_utils:smallest_key_gte(2, TestTree)),
     TestFun(2).
